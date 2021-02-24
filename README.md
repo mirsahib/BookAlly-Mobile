@@ -1,6 +1,6 @@
 ## Book-Ally
 
-A Social Networking app based on your book interest
+A Social Networking app based on users book interest
 
 ![screenshots of example app](.github/images/screenshot.png)
 
