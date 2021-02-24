@@ -1,0 +1,12 @@
+{
+  "name": "book-ally-mobile",
+  "displayName": "book-ally-mobile",
+  "expo": {
+    "name": "book-ally-mobile",
+    "slug": "book-ally-mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
