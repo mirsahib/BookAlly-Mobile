@@ -124,3 +124,9 @@ Before making a PR request you must follow the following workflow:
 ---
 
 [Asim Olmez](https://github.com/asimolmez) for [react-folder-structure](https://github.com/asimolmez/react-native-folder-structure)
+
+## Reference
+
+---
+
+https://stackoverflow.com/questions/60647270/best-practice-to-make-project-structure-react-native
