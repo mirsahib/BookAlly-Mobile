@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 function LoginStackNav() {
   return (
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={Login}  options={({ navigation }) => ({  headerShown: false})}  />
       </Stack.Navigator>
   );
 }

@@ -7,8 +7,8 @@ const Stack = createStackNavigator();
 function DashboardStackNav() {
   return (
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="BrowseByGenre" component={BrowseByGenre} />
+        <Stack.Screen name="Home" component={HomeScreen} options={({ navigation }) => ({  headerShown: false})}   />
+        <Stack.Screen name="BrowseByGenre" component={BrowseByGenre}  options={({ navigation }) => ({  headerShown: false})} />
       </Stack.Navigator>
   
   );

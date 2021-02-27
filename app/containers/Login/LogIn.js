@@ -1,13 +1,27 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { Container, Header, Left, Body, Right, Title, Content, Button, Icon, Text } from 'native-base';
 
-export default function LogIn() {
+export default function LogIn({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>LogIn Screen</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Container  >
+      <Header>
+        <Left>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' />
+          </Button>
+        </Left>
+
+        <Body>
+          <Title>LogIn</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Content contentContainerStyle={styles.container} >
+        <Text>Login Screen</Text>
+
+      </Content>
+    </Container>
   );
 }
 

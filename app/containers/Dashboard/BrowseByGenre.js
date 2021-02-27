@@ -1,14 +1,29 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View,Button } from "react-native";
+import { StyleSheet } from "react-native";
+import { Container, Header, Left, Body, Right, Title, Content, Button, Icon, Text } from 'native-base';
 
-export default function BrowseByGenre({navigation}) {
+export default function BrowseByGenre({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>Browse By Genre Screen</Text>
-      <Button onPress={() => navigation.goBack()} title="Back to Dashboard" />
-      <StatusBar style="auto" />
-    </View>
+    <Container  >
+      <Header>
+        <Left>
+          <Button transparent onPress={() => { navigation.goBack() }}>
+            <Icon name='arrow-back'/>
+          </Button>
+        </Left>
+
+        <Body>
+          <Title> Genre Screen</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Content contentContainerStyle={styles.container} >
+        <Text>Genre Screen</Text>
+        <Button success full onPress={() => navigation.goBack()}  >
+          <Text style={styles.text}> Go to Dashboard Screen </Text>
+        </Button>
+      </Content>
+    </Container>
   );
 }
 
