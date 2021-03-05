@@ -17,13 +17,6 @@ export default function SplashScreen({ navigation }) {
     <Container>
       <Content contentContainerStyle={styles.container}>
         <Text>Splash Screen</Text>
-        <Button
-          success
-          full
-          onPress={() => navigation.navigate("BrowseByGenre")}
-        >
-          <Text style={styles.text}> Go to Genre Screen </Text>
-        </Button>
       </Content>
     </Container>
   );
