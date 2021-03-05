@@ -17,6 +17,13 @@ export default function SplashScreen({ navigation }) {
     <Container>
       <Content contentContainerStyle={styles.container}>
         <Text>Splash Screen</Text>
+        <Button
+          success
+          full
+          onPress={() => navigation.navigate("Registration")}
+        >
+          <Text style={styles.text}> Get Started </Text>
+        </Button>
       </Content>
     </Container>
   );
