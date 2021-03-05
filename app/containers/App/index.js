@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Dashboard from "../Dashboard/index";
+import Dashboard from "../HomeTab/index";
 import Login from "../Login/index";
 import SplashScreen from "../SplashScreen/index";
 
