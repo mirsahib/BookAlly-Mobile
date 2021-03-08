@@ -14,62 +14,81 @@ export default function Registration({ navigation }) {
   const [name, onChangeName] = useState("Enter Your Name");
 
   return (
-    <View style={{ backgroundColor: colors.background, flex: 1 }}>
-      <Image
-        source={require("../../assets/images/header_shape.png")}
-        style={styles.header_shape}
-      />
-      <SafeAreaView>
-        <Text style={styles.app_moto}>Welcome Onboard !</Text>
+    <View style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+        }}
+      >
+        <Image
+          source={require("../../assets/images/header_shape.png")}
+          style={styles.header_shape}
+        />
+      </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.app_moto}>Welcome OnBoard</Text>
         <Text style={styles.app_para} numberOfLines={2}>
           Let’s manage your books and make some friends
         </Text>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
+      </View>
+      <View
+        style={{
+          flex: 2,
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        {/** Add Text input */}
+        <TextInput
+          style={styles.input_field}
+          onChangeName={(text) => onChangeName(text)}
+          value={name}
+        />
+        <TextInput style={styles.input_field} />
+        <TextInput style={styles.input_field} />
+        <TextInput style={styles.input_field} />
+      </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          style={styles.button}
+          success
+          full
+          onPress={() => navigation.navigate("Registration")}
         >
-          <TextInput
-            style={styles.input_field}
-            onChangeName={(text) => onChangeName(text)}
-            value={name}
-          />
-          <TextInput style={styles.input_field} />
-          <TextInput style={styles.input_field} />
-          <TextInput style={styles.input_field} />
-          <View style={styles.button_container}>
-            <Button
-              style={styles.button}
-              success
-              full
-              onPress={() => navigation.navigate("Registration")}
-            >
-              <Text style={styles.button_text}> Register</Text>
-            </Button>
-            <View>
-              <Text style={styles.bottom_text}>
-                Already have an account ?{" "}
-                <Text
-                  style={{
-                    color: colors.background_secondary,
-                    fontFamily: "Poppins-Bold",
-                  }}
-                  onPress={() => navigation.navigate("Login")}
-                >
-                  Sign in
-                </Text>
-              </Text>
-            </View>
-          </View>
-        </View>
-      </SafeAreaView>
+          <Text style={styles.button_text}>Register</Text>
+        </Button>
+        <Text style={styles.bottom_text}>
+          Already have an account ?{" "}
+          <Text
+            style={{
+              color: colors.background_secondary,
+              fontFamily: "Poppins-Bold",
+            }}
+            onPress={() => navigation.navigate("Login")}
+          >
+            Sign in
+          </Text>
+        </Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: { backgroundColor: colors.background, flex: 1 },
   app_moto: {
     fontFamily: "Poppins-SemiBold",
     fontSize: 18,
@@ -89,28 +108,26 @@ const styles = StyleSheet.create({
     height: 50,
     width: "90%",
     borderRadius: 100,
-    paddingLeft: 15,
-    paddingTop: 15,
-    marginLeft: 20,
-    marginBottom: 35,
     backgroundColor: colors.text_white,
     color: colors.text_secondary,
     fontFamily: "Poppins-Medium",
     fontSize: 18,
+    paddingLeft: 15,
   },
   button: {
     backgroundColor: colors.background_secondary,
-    width: 364,
+    width: "95%",
     height: 60,
+    alignSelf: "center",
+    justifyContent: "center",
   },
   button_text: {
     fontFamily: "Poppins-Bold",
     fontSize: 18,
     color: colors.text_white,
+    textAlign: "center",
   },
-  button_container: {
-    marginLeft: 15,
-  },
+
   bottom_text: {
     textAlign: "center",
     marginTop: 10,
