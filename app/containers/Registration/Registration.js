@@ -13,8 +13,6 @@ import { Button } from "native-base";
 import colors from "../../assets/colors/colors";
 
 export default function Registration({ navigation }) {
-  const [name, onChangeName] = useState("Enter Your Name");
-
   return (
     <InputScrollView style={styles.container}>
       <View style={{ flex: 1 }}>
@@ -43,14 +41,21 @@ export default function Registration({ navigation }) {
         }}
       >
         {/** Add Text input */}
+        <TextInput style={styles.input_field} placeholder="Enter your name" />
         <TextInput
           style={styles.input_field}
-          onChangeName={(text) => onChangeName(text)}
-          value={name}
+          placeholder="Enter email address"
         />
-        <TextInput style={styles.input_field} />
-        <TextInput style={styles.input_field} />
-        <TextInput style={styles.input_field} />
+        <TextInput
+          style={styles.input_field}
+          placeholder="Enter password"
+          secureTextEntry={true}
+        />
+        <TextInput
+          style={styles.input_field}
+          placeholder="Confirm password"
+          secureTextEntry={true}
+        />
       </View>
       <View
         style={{
