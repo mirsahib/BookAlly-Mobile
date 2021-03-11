@@ -7,20 +7,15 @@ import {
   Text,
   TextInput,
 } from "react-native";
+import InputScrollView from "react-native-input-scroll-view";
+
 import { Button } from "native-base";
 import colors from "../../assets/colors/colors";
 
 export default function Registration({ navigation }) {
-  const [name, onChangeName] = useState("Enter Your Name");
-
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-        }}
-      >
+    <InputScrollView style={styles.container}>
+      <View style={{ flex: 1 }}>
         <Image
           source={require("../../assets/images/header_shape.png")}
           style={styles.header_shape}
@@ -46,14 +41,21 @@ export default function Registration({ navigation }) {
         }}
       >
         {/** Add Text input */}
+        <TextInput style={styles.input_field} placeholder="Enter your name" />
         <TextInput
           style={styles.input_field}
-          onChangeName={(text) => onChangeName(text)}
-          value={name}
+          placeholder="Enter email address"
         />
-        <TextInput style={styles.input_field} />
-        <TextInput style={styles.input_field} />
-        <TextInput style={styles.input_field} />
+        <TextInput
+          style={styles.input_field}
+          placeholder="Enter password"
+          secureTextEntry={true}
+        />
+        <TextInput
+          style={styles.input_field}
+          placeholder="Confirm password"
+          secureTextEntry={true}
+        />
       </View>
       <View
         style={{
@@ -83,7 +85,7 @@ export default function Registration({ navigation }) {
           </Text>
         </Text>
       </View>
-    </View>
+    </InputScrollView>
   );
 }
 
@@ -94,15 +96,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.text_tertiary,
     textAlign: "center",
-    paddingTop: 10,
   },
   app_para: {
     fontFamily: "Poppins-Regular",
     fontSize: 18,
     textAlign: "center",
     color: colors.text_secondary,
-    paddingTop: 25,
-    paddingBottom: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   input_field: {
     height: 50,
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Medium",
     fontSize: 18,
     paddingLeft: 15,
+    marginBottom: 15,
   },
   button: {
     backgroundColor: colors.background_secondary,
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
     height: 60,
     alignSelf: "center",
     justifyContent: "center",
+    marginTop: 20,
   },
   button_text: {
     fontFamily: "Poppins-Bold",
