@@ -7,25 +7,22 @@ import {
   Text,
   TextInput,
 } from "react-native";
+import InputScrollView from "react-native-input-scroll-view";
 import { Button } from "native-base";
+import { Formik } from "formik";
 import colors from "../../assets/colors/colors";
+import { registrationSchema } from "../../helper/validation";
 
 export default function Registration({ navigation }) {
-  const [name, onChangeName] = useState("Enter Your Name");
-
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-        }}
-      >
+    <InputScrollView style={styles.container}>
+      <View style={{ flex: 1 }}>
         <Image
           source={require("../../assets/images/header_shape.png")}
           style={styles.header_shape}
         />
       </View>
+      {/**end of header shape */}
       <View
         style={{
           flex: 1,
@@ -38,6 +35,7 @@ export default function Registration({ navigation }) {
           Let’s manage your books and make some friends
         </Text>
       </View>
+      {/**end of text */}
       <View
         style={{
           flex: 2,
@@ -46,30 +44,81 @@ export default function Registration({ navigation }) {
         }}
       >
         {/** Add Text input */}
-        <TextInput
-          style={styles.input_field}
-          onChangeName={(text) => onChangeName(text)}
-          value={name}
-        />
-        <TextInput style={styles.input_field} />
-        <TextInput style={styles.input_field} />
-        <TextInput style={styles.input_field} />
-      </View>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Button
-          style={styles.button}
-          success
-          full
-          onPress={() => navigation.navigate("Registration")}
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          validationSchema={registrationSchema}
+          onSubmit={(values, actions) => {
+            actions.resetForm();
+            /** put api request
+             *
+             *
+             **/
+            console.log(values);
+          }}
         >
-          <Text style={styles.button_text}>Register</Text>
-        </Button>
+          {(props) => (
+            <>
+              <TextInput
+                style={styles.input_field}
+                placeholder="Enter your name"
+                onChangeText={props.handleChange("name")}
+                value={props.values.name}
+                onBlur={props.handleBlur("name")}
+              />
+              <Text style={styles.warning_text}>
+                {props.touched.name && props.errors.name}
+              </Text>
+              <TextInput
+                style={styles.input_field}
+                placeholder="Enter email address"
+                onChangeText={props.handleChange("email")}
+                value={props.values.email}
+                onBlur={props.handleBlur("email")}
+              />
+              <Text style={styles.warning_text}>
+                {props.touched.email && props.errors.email}
+              </Text>
+
+              <TextInput
+                style={styles.input_field}
+                placeholder="Enter password"
+                secureTextEntry={true}
+                onChangeText={props.handleChange("password")}
+                value={props.values.password}
+                onBlur={props.handleBlur("password")}
+              />
+              <Text style={styles.warning_text}>
+                {props.touched.password && props.errors.password}
+              </Text>
+
+              <TextInput
+                style={styles.input_field}
+                placeholder="Confirm password"
+                secureTextEntry={true}
+                onChangeText={props.handleChange("confirmPassword")}
+                value={props.values.confirmPassword}
+                onBlur={props.handleBlur("confirmPassword")}
+              />
+              <Text style={styles.warning_text}>
+                {props.touched.confirmPassword && props.errors.confirmPassword}
+              </Text>
+
+              <Button
+                style={styles.button}
+                success
+                full
+                onPress={props.handleSubmit}
+              >
+                <Text style={styles.button_text}>Register</Text>
+              </Button>
+            </>
+          )}
+        </Formik>
         <Text style={styles.bottom_text}>
           Already have an account ?{" "}
           <Text
@@ -83,7 +132,8 @@ export default function Registration({ navigation }) {
           </Text>
         </Text>
       </View>
-    </View>
+      {/**end of input and register button */}
+    </InputScrollView>
   );
 }
 
@@ -94,15 +144,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.text_tertiary,
     textAlign: "center",
-    paddingTop: 10,
   },
   app_para: {
     fontFamily: "Poppins-Regular",
     fontSize: 18,
     textAlign: "center",
     color: colors.text_secondary,
-    paddingTop: 25,
-    paddingBottom: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   input_field: {
     height: 50,
@@ -113,13 +162,16 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Medium",
     fontSize: 18,
     paddingLeft: 15,
+    marginTop: 10,
   },
+  warning_text: { color: "crimson", fontFamily: "Poppins-Bold" },
   button: {
     backgroundColor: colors.background_secondary,
     width: "95%",
     height: 60,
     alignSelf: "center",
     justifyContent: "center",
+    marginTop: 20,
   },
   button_text: {
     fontFamily: "Poppins-Bold",
