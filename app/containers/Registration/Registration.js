@@ -9,9 +9,10 @@ import {
 } from "react-native";
 import InputScrollView from "react-native-input-scroll-view";
 import { Button } from "native-base";
-import { Formik } from "formik";
+import { Formik, FormikProvider } from "formik";
 import colors from "../../assets/colors/colors";
 import { registrationSchema } from "../../helper/validation";
+import { create } from "../../helper/api";
 
 export default function Registration({ navigation }) {
   return (
@@ -53,12 +54,10 @@ export default function Registration({ navigation }) {
           }}
           validationSchema={registrationSchema}
           onSubmit={(values, actions) => {
+            delete values.confirmPassword;
+            create(values);
             actions.resetForm();
-            /** put api request
-             *
-             *
-             **/
-            console.log(values);
+            //console.log(values);
           }}
         >
           {(props) => (

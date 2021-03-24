@@ -1,7 +1,7 @@
-const development=  'http://localhost:3000'  // Important: Read the Note Below
-const production= '' // put your production url here
+const development = "http://10.0.2.2:3000"; // Important: Read the Note Below
+const production = ""; // put your production url here
 
-const url= production
+const url = development;
 
 /* 
  Note: To connect react-native app to your local node app. Follow the steps below:
@@ -10,6 +10,4 @@ const url= production
     3. Close the terminal 
     4 run: react-native run-android
 */
-export {
-    url
-}
+export { url };
