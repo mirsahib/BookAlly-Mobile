@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet,View, Image,TouchableOpacity } from "react-native";
 import { Container, Header, Left, Body, Right, Title, Content, Button, Icon, Text ,Label,Item, Input} from 'native-base';
+import { Formik } from 'formik'
+import * as yup from 'yup'
 
 export default function LogIn({ navigation }) {
   return (
@@ -23,26 +25,60 @@ export default function LogIn({ navigation }) {
         <Image style={styles.img}
           source={require("../../assets/images/undraw_Login_re_4vu2.png")} />
         <View style={{ margin: 20, width: 300 }}>
-          <Item rounded  >
-            <Input
-              style={{ color: '#0f0a3c' }}
-              placeholder="Enter Your Email"
-            />
-          </Item>
-          <Item rounded style={{ marginTop: 10 }}>
-            <Input
-              secureTextEntry={true}
-              placeholder="Enter Your Password"
-            />
-          </Item>
-          <Text gray caption center  style={styles.forgotPassword}>
-             Forgot Password ?
-            </Text>
-        </View>
-        <View style={styles.ButtonView}>
-          <Button rounded style={styles.Button} >
-            <Text style={styles.ButtonText}>Sign In</Text>
-          </Button>
+          <Formik
+            validateOnMount={true}
+            validationSchema={loginValidationSchema}
+            initialValues={{ email: '', password: '' }}
+            onSubmit={values => console.log(values)}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              isValid,
+            }) => (
+              <>
+              <Item rounded  >
+                <Input
+                  name="email"
+                  placeholder="Email Address"
+                  style={{ color: '#0f0a3c' }}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                  keyboardType="email-address"
+                />
+                </Item>
+                {(errors.email && touched.email) &&
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                }
+              <Item rounded style={{ marginTop: 10 }}>
+                <Input
+                  secureTextEntry={true}
+                  placeholder="Enter Your Password"
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                 
+                />
+              </Item>
+                {(errors.password && touched.password) &&
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                }
+                <Text gray caption center  style={styles.forgotPassword}>
+                  Forgot Password ?
+                </Text>
+                <View style={styles.ButtonView}>
+                  <Button rounded style={styles.Button}  onPress={handleSubmit}  disabled={!isValid || values.email === ''} >
+                    <Text style={styles.ButtonText}>Sign In</Text>
+                  </Button>
+                </View>
+              </>
+            )}
+          </Formik>
         </View>
         <TouchableOpacity style={{ paddingTop: 20 }} onPress={() =>navigation.navigate('Registration')} >
           <View style={{ flexDirection: 'row', }}>
@@ -129,6 +165,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     justifyContent: 'center',
     textAlign: 'center'
-
-  }
+  },
+  errorText: {
+    fontSize: 12,
+    color: 'red',
+  },
 });
+
+const loginValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Please enter valid email")
+    .required('Email Address is Required'),
+  password: yup
+    .string()
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Password is required'),
+})
